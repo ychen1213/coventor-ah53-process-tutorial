@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "model": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\AH53_Ideal.zam",
+  "final_step": 5,
+  "source_saved_wafer": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\AH53_Ideal-Output\\Default Zone\\LOFT1N9Q.vwaf",
+  "mode": "ideal",
+  "voxel_size_um": 0.02,
+  "initial_si_volume_um3": 448.00000000000006,
+  "final_si_volume_um3": 342.40000000000003,
+  "removed_si_volume_um3": 105.60000000000002,
+  "final_resist_volume_um3": 0.0,
+  "surface_method": "Native downward GetRayIntersection from air, at six flat/central sample positions.",
+  "surface_samples": [
+    {
+      "x_um": 20.8,
+      "y_um": 0.0,
+      "kind": "ridge",
+      "initial_z_um": 0.5,
+      "final_z_um": 0.5,
+      "depth_nm": 0.0,
+      "normal": [
+        0.0,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "x_um": 24.0,
+      "y_um": 0.0,
+      "kind": "ridge",
+      "initial_z_um": 0.5,
+      "final_z_um": 0.5,
+      "depth_nm": 0.0,
+      "normal": [
+        0.0,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "x_um": 27.2,
+      "y_um": 0.0,
+      "kind": "ridge",
+      "initial_z_um": 0.5,
+      "final_z_um": 0.5,
+      "depth_nm": 0.0,
+      "normal": [
+        0.0,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "x_um": 22.4,
+      "y_um": 0.0,
+      "kind": "gap",
+      "initial_z_um": 0.5,
+      "final_z_um": 0.2,
+      "depth_nm": 300.0,
+      "normal": [
+        0.0,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "x_um": 25.6,
+      "y_um": 0.0,
+      "kind": "gap",
+      "initial_z_um": 0.5,
+      "final_z_um": 0.2,
+      "depth_nm": 300.0,
+      "normal": [
+        0.0,
+        -0.0,
+        1.0
+      ]
+    },
+    {
+      "x_um": 18.0,
+      "y_um": 0.0,
+      "kind": "field",
+      "initial_z_um": 0.5,
+      "final_z_um": 0.2,
+      "depth_nm": 300.0,
+      "normal": [
+        0.0,
+        -0.0,
+        1.0
+      ]
+    }
+  ],
+  "checks": {
+    "native_build_complete": true,
+    "saved_final_wafer_exists": true,
+    "requested_voxel_spacing": true,
+    "positive_remaining_si": true,
+    "silicon_was_removed": true,
+    "no_resist_after_strip": true,
+    "all_rays_finite": true,
+    "ideal_ridge_tops_preserved": true,
+    "ideal_field_depth_300nm_with_voxel_tolerance": true,
+    "vdata_integrity": true,
+    "native_sources_unchanged": true
+  },
+  "all_checks_passed": true,
+  "vdata": {
+    "file": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\AH53_Ideal.vdata",
+    "file_bytes": 921597,
+    "sha256": "735a0510e9a28f9f3e4d44836e324801008b79c35b5e9355b68a876ecbf53c4b",
+    "xml_root": "VoxelXML",
+    "voxel_size_um": 0.02,
+    "dimensions_xyz": [
+      800,
+      1400,
+      50
+    ],
+    "voxel_count": 56000000,
+    "origin_um": [
+      16.0,
+      -14.0,
+      -0.5
+    ],
+    "bounds_um": [
+      [
+        16.0,
+        -14.0,
+        -0.5
+      ],
+      [
+        32.0,
+        14.0,
+        0.5
+      ]
+    ],
+    "materials": [
+      {
+        "blue": "50",
+        "green": "50",
+        "name": "default",
+        "red": "50",
+        "visibility": "true"
+      },
+      {
+        "MaterialID": "2",
+        "blue": "190",
+        "green": "153",
+        "name": "/Silicon/Si_Xtal",
+        "red": "108",
+        "transparency": "0.0",
+        "type": "Dielectric",
+        "visibility": "true"
+      },
+      {
+        "MaterialID": "253",
+        "blue": "64",
+        "green": "64",
+        "name": "/Void",
+        "red": "64",
+        "transparency": "0.0",
+        "type": "Dielectric",
+        "visibility": "false"
+      }
+    ],
+    "voxel_payloads": [
+      {
+        "compressed_bytes": 667754,
+        "decoded_bytes": 168000000,
+        "zlib_blocks": 2564
+      }
+    ],
+    "plane_equation_payloads": [],
+    "integrity_pass": true,
+    "source_file_unchanged": true,
+    "sdk_or_process_simulation_used": false,
+    "limit": "Checks bytes, metadata and compression integrity. Not a fabrication calibration or optical accuracy certificate."
+  },
+  "process_simulation_repeated": false,
+  "limit": "Behavioral teaching process. Passing these checks does not calibrate real etch physics or certify arbitrary sidewall/CD accuracy."
+}

@@ -1,0 +1,22 @@
+# Native process inputs and outputs are generated locally.
+__pycache__/
+*.py[cod]
+runs/
+validation/
+output/
+.playwright-cli/
+*-Input/
+*-Output/
+*.vdata
+*.vwaf
+*.vmpd
+*.vproc
+*.zam
+*.gds
+*.cat
+*.fsp
+*.stl
+*.lic
+license/
+.env
+.env.*

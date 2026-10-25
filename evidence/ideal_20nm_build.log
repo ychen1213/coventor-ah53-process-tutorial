@@ -1,0 +1,34 @@
+13:23:41 INFO   Loading Assembly file: D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam
+13:23:41 INFO   Loading Analysis file: 
+13:23:41 INFO   Loading Process file: D:/CoventorProjects/AH53_Process_Tutorial/validation/ideal_20nm_20261025/AH53_Ideal.vproc
+13:23:41 INFO   Loading Material file: D:/CoventorProjects/AH53_Process_Tutorial/validation/ideal_20nm_20261025/AH53_Ideal.vmpd
+13:23:42 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:23:42 INFO   Saving build script: D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\__semu_AH53_Ideal.py
+13:23:42 INFO   Building model from D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\__semu_AH53_Ideal.py
+13:23:43 INFO : License server value is D:\SEMulator3D9\bin.
+13:23:43 INFO : Platform is Windows, 64-bit.
+13:23:43 INFO : PRODUCT_NAME             SEMulator3D
+13:23:43 INFO : VERSION_BUILD_NUMBER     9.3.0.0
+13:23:43 INFO : VERSION_BUILD_TIMESTAMP  Sat Sep 25 19:05:17 2021
+13:23:43 INFO : 
+
+13:23:44 INFO   Default number of parallel workers = 8
+13:23:44 INFO   Adding new input file path: D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\
+13:23:44 INFO : 1:	Running WaferSetup ("01 Si substrate 1um")
+13:23:44 INFO   Voxel Wafer resolution is 0.02 um.
+13:23:44 INFO   Model bounds for new wafer are 800 by 1400 voxels.
+13:23:44 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:23:44 INFO : 2:	Running Deposit ("02 Coat resist 0.5um")
+13:23:44 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:23:44 INFO : 3:	Running ExposeMaterial ("03 Protect AH53 ridges")
+13:23:44 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:23:44 INFO : 4:	Running Etch ("04 Etch surrounding Si 300nm")
+13:23:44 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:23:44 INFO : 5:	Running RemoveMaterials ("05 Strip resist")
+13:23:44 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:23:44 INFO : 6:	Running VoxelDataExport ("06 Export final VDATA")
+13:24:15 INFO   VoxelXMLExport finished.
+13:24:15 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:24:15 INFO   Saving assembly file "D:\CoventorProjects\AH53_Process_Tutorial\validation\ideal_20nm_20261025\AH53_Ideal.zam".
+13:24:15 INFO : Build process completed.
+13:24:15 INFO : Elapsed Time 31 seconds.

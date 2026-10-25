@@ -1,0 +1,61 @@
+
+D:\CoventorProjects\AH53_Si_300nm_Nonideal>rem Copyright 2009-2014 Coventor, Inc. 
+
+D:\CoventorProjects\AH53_Si_300nm_Nonideal>rem All rights reserved. 
+
+D:\CoventorProjects\AH53_Si_300nm_Nonideal>rem  
+SEMulator3D Installation dir :-  D:\SEMulator3D9
+SEMulator3D project folder is D:/宸ヤ綔/coventor.
+20:39:56 INFO   Loading Assembly file: D:\CoventorProjects\AH53_Si_300nm_Nonideal\AH53_Si_300nm_Nonideal.zam
+20:39:56 INFO   Loading Analysis file: 
+20:39:57 INFO   Loading Process file: D:/CoventorProjects/AH53_Si_300nm_Nonideal/AH53_Si_300nm_Nonideal.vproc
+20:39:57 INFO   Loading Material file: D:/CoventorProjects/AH53_Si_300nm_Nonideal/AH53_Si_300nm_Nonideal.vmpd
+20:39:57 INFO   No masks which are used in the process have been modified.
+20:39:57 INFO   Preparing for incremental re-build of the 3D model.
+20:39:57 INFO   Process steps need to re-run, starting at 8
+20:39:57 INFO   Analysis steps need to re-run, starting at 
+20:39:57 INFO   Saving assembly file "D:\CoventorProjects\AH53_Si_300nm_Nonideal\AH53_Si_300nm_Nonideal.zam".
+20:39:57 INFO   Saving build script: D:\CoventorProjects\AH53_Si_300nm_Nonideal\__semu_AH53_Si_300nm_Nonideal.py
+20:39:57 INFO   Building model from D:\CoventorProjects\AH53_Si_300nm_Nonideal\__semu_AH53_Si_300nm_Nonideal.py
+20:39:58 INFO : License server value is D:\SEMulator3D9\bin.
+
+20:39:58 INFO : Platform is Windows, 64-bit.
+
+20:39:58 INFO : PRODUCT_NAME             SEMulator3D
+
+20:39:58 INFO : VERSION_BUILD_NUMBER     9.3.0.0
+
+20:39:58 INFO : VERSION_BUILD_TIMESTAMP  Sat Sep 25 19:05:17 2021
+
+20:39:58 INFO : 
+
+
+
+20:39:58 INFO   Default number of parallel workers = 8
+20:39:58 INFO   Adding new input file path: D:\CoventorProjects\AH53_Si_300nm_Nonideal\
+20:39:58 INFO : 1:	Skipping unmodified step WaferSetup ("01 Si substrate 1um")
+
+20:39:58 INFO : 2:	Skipping unmodified step Deposit ("02 Coat resist 0.5um")
+
+20:39:58 INFO : 3:	Skipping unmodified step ExposeMaterial ("03 Rounded rough resist pattern")
+
+20:39:58 INFO : 4:	Skipping unmodified step MultiEtch ("04 Taper etch with density loading")
+
+20:39:58 INFO : 5:	Skipping unmodified step MultiEtch ("05 Tilted directional trim")
+
+20:39:58 INFO : 6:	Skipping unmodified step Etch ("06 Isotropic Si finish under resist")
+
+20:39:58 INFO : 7:	Skipping unmodified step RemoveMaterials ("07 Strip resist - final nonideal Si")
+
+20:39:58 INFO : 8:	Running VoxelDataExport ("08 Export nonideal VDATA")
+
+20:39:58 INFO : Loading wafer 'Wafer1' for restart at step 8.
+
+20:39:58 INFO   Voxel Wafer resolution is 0.02 um.
+20:40:29 INFO   VoxelXMLExport finished.
+20:40:29 INFO   Saving assembly file "D:\CoventorProjects\AH53_Si_300nm_Nonideal\AH53_Si_300nm_Nonideal.zam".
+20:40:29 INFO   Saving assembly file "D:\CoventorProjects\AH53_Si_300nm_Nonideal\AH53_Si_300nm_Nonideal.zam".
+20:40:29 INFO : Build process completed.
+
+20:40:29 INFO : Elapsed Time 30 seconds.
+

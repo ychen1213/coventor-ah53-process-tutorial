@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "action": "run",
+  "output": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025",
+  "semulator_root": "D:\\SEMulator3D9",
+  "sdk_python": "D:\\SEMulator3D9\\runtime\\python\\v3.6\\NT40_x64\\python.exe",
+  "stages": [
+    {
+      "name": "generate_inputs",
+      "command": [
+        "D:\\SEMulator3D9\\runtime\\python\\v3.6\\NT40_x64\\python.exe",
+        "D:\\CoventorProjects\\AH53_Process_Tutorial\\code\\project_generator.py",
+        "--output",
+        "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025",
+        "--semulator-root",
+        "D:\\SEMulator3D9",
+        "--mode",
+        "ideal",
+        "--voxel-nm",
+        "20.0"
+      ],
+      "log": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\generate_inputs.log",
+      "status": "complete",
+      "pid": 11488,
+      "returncode": 0,
+      "elapsed_seconds": 2.468999999924563
+    },
+    {
+      "name": "build",
+      "command": [
+        "D:\\SEMulator3D9\\bin\\NT40_x64\\ModelBuilder.exe",
+        "-m",
+        "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\AH53_Ideal.zam",
+        "--killFile",
+        "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\cancel_modelbuild.request"
+      ],
+      "log": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\build.log",
+      "status": "complete",
+      "pid": 60228,
+      "returncode": 0,
+      "elapsed_seconds": 35.25
+    },
+    {
+      "name": "verify_saved_geometry",
+      "command": [
+        "D:\\SEMulator3D9\\runtime\\python\\v3.6\\NT40_x64\\python.exe",
+        "D:\\CoventorProjects\\AH53_Process_Tutorial\\code\\native_verify.py",
+        "--folder",
+        "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025"
+      ],
+      "log": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\verify_saved_geometry.log",
+      "status": "complete",
+      "pid": 50320,
+      "returncode": 0,
+      "elapsed_seconds": 1.2179999999934807
+    }
+  ],
+  "native_process_build_run": true,
+  "optical_fdtd_simulation_run": false,
+  "license_handling": "Inherited license environment; fallback is installation license path. License contents are never read.",
+  "vdata": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\AH53_Ideal.vdata",
+  "native_verification": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\native_verification.json"
+}

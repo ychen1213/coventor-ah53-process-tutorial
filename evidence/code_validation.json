@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "existing_output_refused": true,
+    "existing_report_preserved": true,
+    "check_only_no_site_packages": true,
+    "nonideal_inputs_20nm_20261025_not_simulated": true,
+    "nonideal_inputs_20nm_20261025_stepcount": true,
+    "nonideal_inputs_20nm_20261025_requested_resolution": true,
+    "nonideal_inputs_20nm_20261025_absolute_paths": true,
+    "ideal_inputs_40nm_full_20261025_not_simulated": true,
+    "ideal_inputs_40nm_full_20261025_stepcount": true,
+    "ideal_inputs_40nm_full_20261025_requested_resolution": true,
+    "ideal_inputs_40nm_full_20261025_absolute_paths": true
+  },
+  "all_checks_passed": true,
+  "ideal_actual_run_report": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\run_report.json",
+  "ideal_actual_native_verification": "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\native_verification.json",
+  "actual_stage_wall_seconds_sum": 38.936999999918044,
+  "ideal_checks_passed": true,
+  "export_only_reports": [
+    "D:\\CoventorProjects\\AH53_Process_Tutorial\\validation\\ideal_20nm_20261025\\exports\\export_report_20261025_132545_835048.json"
+  ],
+  "nonideal_simulation_run": false
+}

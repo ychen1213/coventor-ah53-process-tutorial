@@ -1,0 +1,321 @@
+{
+  "source_model": "D:\\CoventorProjects\\AH53_Si_300nm_Nonideal\\AH53_Si_300nm_Nonideal.zam",
+  "ideal_reference_model": "D:\\CoventorProjects\\AH53_Si_300nm_Raised\\AH53_Si_300nm_Raised.zam",
+  "simulation_roi_xy_um": [
+    16.0,
+    -14.0,
+    32.0,
+    14.0
+  ],
+  "measured_bar_centers_x_um": [
+    20.8,
+    24.0,
+    27.2
+  ],
+  "method": "Native surface queries and 50% Si fraction contour from an in-memory crop",
+  "voxel_size_um": 0.02,
+  "interpretation": "Uncalibrated combined-process example. No claim of real-tool prediction, exact sidewall angle, or specified corner radius.",
+  "resolution_note": "Coordinates interpolate the 50% contour of 20 nm voxels; this does not establish sub-voxel physical accuracy. Fine curvature is limited by the mesh.",
+  "build_complete": true,
+  "final_resist_volume_um3": 0.0,
+  "final_si_volume_um3": 347.31284893750006,
+  "initial_si_surface_z_um": 0.5,
+  "initial_surface_reference_xy_um": [
+    18.0,
+    0.0
+  ],
+  "silicon_removed_volume_um3": 100.68715106249999,
+  "bar_surface_z_um": {
+    "count": 3,
+    "mean": 0.5,
+    "std_population": 0.0,
+    "min": 0.5,
+    "max": 0.5,
+    "peak_to_peak": 0.0
+  },
+  "gap_surface_z_um": {
+    "count": 2,
+    "mean": 0.23789062500000002,
+    "std_population": 7.812499999999833e-05,
+    "min": 0.2378125,
+    "max": 0.23796875,
+    "peak_to_peak": 0.00015624999999999667
+  },
+  "open_field_surface_z_um": {
+    "count": 1,
+    "mean": 0.21875,
+    "std_population": 0.0,
+    "min": 0.21875,
+    "max": 0.21875,
+    "peak_to_peak": 0.0
+  },
+  "local_bar_heights": [
+    {
+      "bar_center_x_um": 20.8,
+      "y_um": 0.0,
+      "bar_top_z_um": 0.5,
+      "left_floor_z_um": 0.224375,
+      "right_floor_z_um": 0.23796875,
+      "height_over_left_floor_nm": 275.625,
+      "height_over_right_floor_nm": 262.03125
+    },
+    {
+      "bar_center_x_um": 24.0,
+      "y_um": 0.0,
+      "bar_top_z_um": 0.5,
+      "left_floor_z_um": 0.23796875,
+      "right_floor_z_um": 0.2378125,
+      "height_over_left_floor_nm": 262.03125,
+      "height_over_right_floor_nm": 262.1875
+    },
+    {
+      "bar_center_x_um": 27.2,
+      "y_um": 0.0,
+      "bar_top_z_um": 0.5,
+      "left_floor_z_um": 0.2378125,
+      "right_floor_z_um": 0.22328125000000001,
+      "height_over_left_floor_nm": 262.1875,
+      "height_over_right_floor_nm": 276.71875
+    }
+  ],
+  "fraction_crop_bounds_um": [
+    19.0,
+    -11.0,
+    0.12,
+    29.0,
+    11.0,
+    0.5
+  ],
+  "fraction_array_shape": [
+    500,
+    1100,
+    19
+  ],
+  "voxel_cross_section_y_um": -0.009999999999999787,
+  "ler_measurement_z_um": 0.35,
+  "ler_measurement_y_range_um": [
+    -9.0,
+    9.0
+  ],
+  "one_group_bar_metrics": [
+    {
+      "center_x_um": 20.8,
+      "cd_along_y_um": {
+        "count": 900,
+        "mean": 1.4687377483459116,
+        "std_population": 0.07542677893700526,
+        "min": 1.2966042446941337,
+        "max": 1.6121235925634956,
+        "peak_to_peak": 0.31551934786936187
+      },
+      "left_edge_delta_nm": {
+        "count": 900,
+        "mean": 51.85651946006144,
+        "std_population": 58.22691060589449,
+        "min": -96.8041237113404,
+        "max": 162.67326732673482,
+        "peak_to_peak": 259.4773910380752
+      },
+      "right_edge_delta_nm": {
+        "count": 900,
+        "mean": -79.40573219402835,
+        "std_population": 58.10193713619451,
+        "min": -205.80246913580424,
+        "max": 54.39024390243574,
+        "peak_to_peak": 260.19271303823996
+      },
+      "left_edge_ler_1sigma_nm": 58.22691060589449,
+      "right_edge_ler_1sigma_nm": 58.10193713619451,
+      "center_shift_nm": {
+        "count": 900,
+        "mean": -13.774606366983434,
+        "std_population": 44.28097067183149,
+        "min": -116.97996134676103,
+        "max": 71.41599874273297,
+        "peak_to_peak": 188.395960089494
+      },
+      "left_sidewall_fit": {
+        "x_per_z_slope": 0.24311024079896804,
+        "angle_magnitude_from_vertical_deg": 13.664112129450476,
+        "line_fit_residual_rms_nm": 3.168257511707477,
+        "fit_z_min_um": 0.31,
+        "fit_z_max_um": 0.45
+      },
+      "right_sidewall_fit": {
+        "x_per_z_slope": -0.16145157118178072,
+        "angle_magnitude_from_vertical_deg": 9.171351430575026,
+        "line_fit_residual_rms_nm": 2.5103474781331974,
+        "fit_z_min_um": 0.31,
+        "fit_z_max_um": 0.45
+      },
+      "left_inward_shift_mean_nm": 51.85651946006144,
+      "right_inward_shift_mean_nm": 79.40573219402835,
+      "left_minus_right_inward_asymmetry_nm": -27.549212733966904
+    },
+    {
+      "center_x_um": 24.0,
+      "cd_along_y_um": {
+        "count": 900,
+        "mean": 1.5400148562862546,
+        "std_population": 0.10296627785875728,
+        "min": 1.3212832080200485,
+        "max": 1.8225859146247494,
+        "peak_to_peak": 0.5013027066047009
+      },
+      "left_edge_delta_nm": {
+        "count": 900,
+        "mean": 16.998364526959367,
+        "std_population": 57.177744863876654,
+        "min": -148.02816901408278,
+        "max": 137.57281553398215,
+        "peak_to_peak": 285.60098454806496
+      },
+      "right_edge_delta_nm": {
+        "count": 900,
+        "mean": -42.986779186787494,
+        "std_population": 71.77015438345755,
+        "min": -162.190476190478,
+        "max": 161.2280701754365,
+        "peak_to_peak": 323.4185463659145
+      },
+      "left_edge_ler_1sigma_nm": 57.177744863876654,
+      "right_edge_ler_1sigma_nm": 71.77015438345755,
+      "center_shift_nm": {
+        "count": 900,
+        "mean": -12.994207329914078,
+        "std_population": 39.49191296898964,
+        "min": -100.48484848484662,
+        "max": 59.461279461281435,
+        "peak_to_peak": 159.94612794612806
+      },
+      "left_sidewall_fit": {
+        "x_per_z_slope": 0.2987910577084065,
+        "angle_magnitude_from_vertical_deg": 16.635675134935898,
+        "line_fit_residual_rms_nm": 5.874638224140873,
+        "fit_z_min_um": 0.31,
+        "fit_z_max_um": 0.45
+      },
+      "right_sidewall_fit": {
+        "x_per_z_slope": -0.16404715235454415,
+        "angle_magnitude_from_vertical_deg": 9.316229760494668,
+        "line_fit_residual_rms_nm": 2.1020379744542383,
+        "fit_z_min_um": 0.31,
+        "fit_z_max_um": 0.45
+      },
+      "left_inward_shift_mean_nm": 16.998364526959367,
+      "right_inward_shift_mean_nm": 42.986779186787494,
+      "left_minus_right_inward_asymmetry_nm": -25.988414659828127
+    },
+    {
+      "center_x_um": 27.2,
+      "cd_along_y_um": {
+        "count": 900,
+        "mean": 1.5153607332847348,
+        "std_population": 0.10412664159004117,
+        "min": 1.2893911248710026,
+        "max": 1.809472679551419,
+        "peak_to_peak": 0.5200815546804165
+      },
+      "left_edge_delta_nm": {
+        "count": 900,
+        "mean": 27.973705193586177,
+        "std_population": 69.86017612680911,
+        "min": -180.3225806451607,
+        "max": 153.15789473684305,
+        "peak_to_peak": 333.48047538200376
+      },
+      "right_edge_delta_nm": {
+        "count": 900,
+        "mean": -56.665561521680516,
+        "std_population": 55.2515242072035,
+        "min": -177.80952380952542,
+        "max": 67.77777777777771,
+        "peak_to_peak": 245.58730158730313
+      },
+      "left_edge_ler_1sigma_nm": 69.86017612680911,
+      "right_edge_ler_1sigma_nm": 55.2515242072035,
+      "center_shift_nm": {
+        "count": 900,
+        "mean": -14.345928164047157,
+        "std_population": 35.44006483683083,
+        "min": -102.11781206171011,
+        "max": 70.57185405808042,
+        "peak_to_peak": 172.68966611979053
+      },
+      "left_sidewall_fit": {
+        "x_per_z_slope": 0.311460639230911,
+        "angle_magnitude_from_vertical_deg": 17.299755739051704,
+        "line_fit_residual_rms_nm": 5.767004541635792,
+        "fit_z_min_um": 0.31,
+        "fit_z_max_um": 0.45
+      },
+      "right_sidewall_fit": {
+        "x_per_z_slope": -0.15778672621508016,
+        "angle_magnitude_from_vertical_deg": 8.966588493748482,
+        "line_fit_residual_rms_nm": 2.731371488299811,
+        "fit_z_min_um": 0.31,
+        "fit_z_max_um": 0.45
+      },
+      "left_inward_shift_mean_nm": 27.973705193586177,
+      "right_inward_shift_mean_nm": 56.665561521680516,
+      "left_minus_right_inward_asymmetry_nm": -28.69185632809434
+    }
+  ],
+  "pr_volume_after_main_etch_um3": 42.61285581250001,
+  "paired_directional_step_comparison": {
+    "method": "Same center bar and horizontal voxel slices, step 4 versus step 5",
+    "interpretation": "Increment introduced during the visibility/tilt step; random mask shape is held fixed. No zero-tilt control, so not a unique causal attribution to tilt alone.",
+    "left_inward_change_nm": {
+      "count": 9,
+      "mean": 3.5177373684053888,
+      "std_population": 1.010808176744574,
+      "min": 2.168241115608538,
+      "max": 5.630498533726325,
+      "peak_to_peak": 3.4622574181177868
+    },
+    "right_inward_change_nm": {
+      "count": 9,
+      "mean": 20.663781802270698,
+      "std_population": 10.69779289370751,
+      "min": 3.1567409572517136,
+      "max": 39.477444376402104,
+      "peak_to_peak": 36.32070341915039
+    },
+    "center_displacement_nm": {
+      "count": 9,
+      "mean": -8.573022216932655,
+      "std_population": 5.292084102907566,
+      "min": -17.843985346095437,
+      "max": -0.032476758818233975,
+      "peak_to_peak": 17.811508587277203
+    },
+    "left_minus_right_inward_change_nm": {
+      "count": 9,
+      "mean": -17.14604443386531,
+      "std_population": 10.584168205815132,
+      "min": -35.68797069219087,
+      "max": -0.06495351763646795,
+      "peak_to_peak": 35.623017174554406
+    }
+  },
+  "pr_volume_before_main_etch_um3": 48.42672812500001,
+  "pr_consumed_in_main_etch_um3": 5.813872312500003,
+  "pr_consumed_fraction_in_main_etch": 0.12005503030254537,
+  "lithography_pr_center_bar_cd_um": {
+    "count": 900,
+    "mean": 1.6425586264962682,
+    "std_population": 0.10309503488152431,
+    "min": 1.4212280140709943,
+    "max": 1.920430107526883,
+    "peak_to_peak": 0.49920209345588873
+  },
+  "lithography_pr_left_ler_1sigma_nm": 57.50263576782311,
+  "lithography_pr_right_ler_1sigma_nm": 71.82647744152172,
+  "center_bar_final_midheight_cd_change_from_litho_mean_nm": -102.54377021001359,
+  "measurement_checks": {
+    "native_build_complete": true,
+    "no_resist_after_strip": true,
+    "three_group_bars_measurable_at_midheight": true,
+    "all_profile_samples_finite": true
+  }
+}

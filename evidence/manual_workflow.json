@@ -1,0 +1,339 @@
+{
+  "scope": "SEMulator3D 9.3 手动建模工作流核查；依据本机安装的 HTML 官方帮助及既有已运行教学项目，未操作用户 GUI、未启动新的工艺仿真。内容为中文归纳，不是手册复制。",
+  "software": {
+    "product": "SEMulator3D",
+    "version": "9.3.0.0",
+    "build_timestamp": "Sat Sep 25 19:05:17 2021",
+    "evidence": "D:/SEMulator3D9/about.txt",
+    "gui_version_menu": "Help > About SEMulator3D"
+  },
+  "sources": {
+    "common_menus": "D:/SEMulator3D9/docs/Documentation/Content/Getting_Started/Menus_Tools.htm",
+    "manager_setup": "D:/SEMulator3D9/docs/Documentation/Content/Components/Manager/model_setup.htm",
+    "manager_menus": "D:/SEMulator3D9/docs/Documentation/Content/Components/Manager/menus.htm",
+    "manager_build": "D:/SEMulator3D9/docs/Documentation/Content/Components/Manager/build-model.htm",
+    "material_database": "D:/SEMulator3D9/docs/Documentation/Content/Components/Libraries/Material/ML_MatDBs.htm",
+    "material_library": "D:/SEMulator3D9/docs/Documentation/Content/Components/Libraries/Material/ML_Intro.htm",
+    "process_menus": "D:/SEMulator3D9/docs/Documentation/Content/Components/Editors/Process/PE_Menus.htm",
+    "process_library": "D:/SEMulator3D9/docs/Documentation/Content/Components/Editors/Process/PE_Components.htm",
+    "wafer": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/wafer-setup.htm",
+    "deposit_inputs": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Deposition/common-inputs.htm",
+    "planar_deposit": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Deposition/Planarizing.htm",
+    "exposure": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Litho/Expose_Material.htm",
+    "straight_etch": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Etch/Etch/Straight.htm",
+    "basic_etch": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Etch/Etch/Basic.htm",
+    "taper_etch": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Etch/Etch/Taper.htm",
+    "multi_etch": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Etch/Multi_Etch/Multi_Etch.htm",
+    "remove": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Remove_Materials.htm",
+    "vdata": "D:/SEMulator3D9/docs/Documentation/Content/Modeling/SaveImpExp/Voxel_Data_Export.htm",
+    "gds_open": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/LE_ExpImp.htm",
+    "gds_translator": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/File_Translators/LE_GDS.htm",
+    "viewer_steps": "D:/SEMulator3D9/docs/Documentation/Content/Visualization/ug/viewing-output.htm",
+    "viewer_cross_section": "D:/SEMulator3D9/docs/Documentation/Content/Visualization/ug/viewer-xsec.htm",
+    "viewer_menus": "D:/SEMulator3D9/docs/Documentation/Content/Visualization/ref/Menus/View.htm",
+    "old_ideal_guide_secondary": "D:/CoventorProjects/AH53_Si_300nm_Raised/guide.html",
+    "old_ideal_recipe_secondary": "D:/CoventorProjects/AH53_Si_300nm_Raised/create_project.py",
+    "old_nonideal_inputs_secondary": "D:/CoventorProjects/AH53_Si_300nm_Nonideal/parameters.json"
+  },
+  "manual_workflow": [
+    {
+      "step": 1,
+      "title": "打开独立空窗口，避免替换已有工程",
+      "actions": [
+        "在 SEMulator3D 主程序选择 Window > New，打开新空窗口。",
+        "确认 Manager、Process Editor、Material Library 标签可见；可通过 Window 的 Tabs 或对应标签显示入口恢复。",
+        "注意 File > New 的官方定义是清空当前活动标签，不代表一次建立所有项目依赖。"
+      ],
+      "evidence": ["common_menus: File Menu > New; Window Menu > New / Tabs"]
+    },
+    {
+      "step": 2,
+      "title": "准备材料数据库 .vmpd",
+      "actions": [
+        "切换 Material Library；可用 File > Open 打开已有材料库，再 File > Save As 保存项目自己的副本。",
+        "本机实际安装文件为 D:/SEMulator3D9/apps/SEMulator3DMaterialsDatabase9.vmpd。不要按帮助正文中过时的示例拼写猜文件名。",
+        "检查 /Silicon/Si_Xtal 与 /Organics/Resist；工艺材料不需要预先填写 FDTD 的 Palik 光学色散。",
+        "若缺材料，可用 Material Library 的 Add 下拉创建 Material / Material Group；不要仅在工艺步骤输入不存在的名称。"
+      ],
+      "evidence": ["material_library: Access / Using the Material Library / Menus and Icons", "material_database: Setting the Default Database / Changing the Database"],
+      "verified_install_file": "D:/SEMulator3D9/apps/SEMulator3DMaterialsDatabase9.vmpd"
+    },
+    {
+      "step": 3,
+      "title": "建立工艺文件并确认当前单位",
+      "actions": [
+        "切换 Process Editor，File > New 新建工艺；Wafer Setup 会自动成为第一个步骤。",
+        "在 Process Editor 的 File > Properties 打开当前工艺的 Document Properties，关联项目 .vmpd，并把当前工艺 Model Unit 设为 micrometers / um。",
+        "File > Save As 保存 .vproc。",
+        "Tools > Options 内的 Default Model Unit 只设置以后新文件的默认值，不能据此断定当前文件已经改单位。"
+      ],
+      "evidence": ["process_menus: File > Properties; Tools > Options", "wafer: opening paragraphs"]
+    },
+    {
+      "step": 4,
+      "title": "在 Manager 指定 GDS、层映射和顶层单元",
+      "actions": [
+        "切换 Manager，必要时 File > New 清空当前 Manager 设置。",
+        "Analysis or Process File 选择刚保存的 .vproc；Layout File 选择教程的 .gds；无需先把 GDS 转为 CAT 才能工艺仿真。",
+        "Layout Map File 选择教程的 -layermap.txt，使 layer/datatype 1/0 对应 AH53_KEEP，99/0 对应 DOMAIN。",
+        "点击 Top Cell 旁的 Scan，随后选择 AH53_DEMO。不能把 GDS 文件名当成 cell 名。",
+        "可打开 Layout Editor 验证图形。它支持 File > Open 直接读 GDS；若出现 template 提示而不需要转换，可取消模板选择。复杂映射才需要 File > Translators > Gds In。"
+      ],
+      "evidence": ["manager_setup: Analysis or Process File / Layout File / Layout Map File / Top Cell", "gds_open: Direct GDS, CIF, and DXF Import", "gds_translator: GDS Input"],
+      "layer_map_text_verified_in_prior_project": "AH53_KEEP  1  0\nDOMAIN  99  0\n",
+      "layer_map_syntax_evidence": "旧的已运行项目 AH53_Si_300nm_Raised-layermap.txt 和 create_project.py；官方 manager_setup 确认映射语义，未据此声称手册示例给出了上述文本语法。",
+      "no_mapping_alternative": "不提供 Layout Map File 时，可使用 L1D0、L99D0 等原始层名；必须在所有 Mask Name 字段保持一致。"
+    },
+    {
+      "step": 5,
+      "title": "设置体素分辨率和模型范围",
+      "actions": [
+        "Manager 的 Model Resolution 输入 0.02，前提是当前 .vproc 单位为 um，即 20 nm 体素。",
+        "完整一组三条 mark 的既有非理想示例范围为 X=16..32 um、Y=-14..14 um。可选择 Model Extent > Bounding Box，输入该范围；或用 Single Mask 并选与期望范围一致的 DOMAIN。",
+        "如果 GDS 包含四组版图而只仿真一组，必须用一组的 Bounding Box；不能让 All Active Masks 自动扩大为四组后仍按一组估算资源。",
+        "勾选 Save After Every Step 与 Launch Viewer After Building，便于逐工艺检查和自动打开结果。",
+        "注意 Wafer Setup 的 Override X-Y Extents 可覆盖 Manager 范围，二者要一致。"
+      ],
+      "evidence": ["manager_setup: Model Resolution / Model Extent / Save After Every Step / Launch Viewer After Building", "wafer: Override X-Y Extents"],
+      "accuracy_note": "官方说明模型精度容差为一个体素；最小待表达几何尺寸至少约为两个体素。20 nm 网格不能当作任意亚纳米工艺形貌保证。"
+    },
+    {
+      "step": 6,
+      "title": "初始硅片：Wafer Setup",
+      "actions": [
+        "选中首个 Wafer Setup，在 Step Properties 设置 Wafer Name=Wafer1、Material=/Silicon/Si_Xtal、Thickness=1.0。",
+        "Surface Plane / Notch Vector 等晶向字段可保留教程指定值；在采用晶体刻蚀时这些参数才需按真实晶向核对。",
+        "若使用掩模范围，Override X-Y Extents 选 Mask 并设置 DOMAIN；若使用 Manager 范围则避免再覆盖到另一片区域。"
+      ],
+      "evidence": ["wafer: Wafer Name / Material / Thickness / Surface Plane / Override X-Y Extents"]
+    },
+    {
+      "step": 7,
+      "title": "涂胶：Planar Deposit / Planarizing",
+      "actions": [
+        "在左侧 Process Library 的 Deposition 中双击 Planar Deposit；也可用 Add 按钮下拉找到对应 step prototype。",
+        "在 Step Properties 将 Deposit Type 设为 Planarizing，Wafer=Wafer1，Wafer Side=Top，Material=/Organics/Resist，Thickness=0.5。",
+        "Reference Plane 使用 Highest Elevation；不要意外给涂胶步骤绑定 AH53_KEEP 掩模，涂胶应先覆盖整片硅表面。"
+      ],
+      "evidence": ["process_library: Deposition", "process_menus: Toolbar Icons > Add", "deposit_inputs: Material / Thickness / Deposit Type", "planar_deposit: Reference Plane"],
+      "label_note": "默认 Process Library 的预设叫 Planar Deposit，步骤动作/类型可显示 Planarizing Deposit；两者不是不同的物理步骤。"
+    },
+    {
+      "step": 8,
+      "title": "曝光去掉图形外的胶：Expose Material",
+      "actions": [
+        "Process Library > Lithography，双击 Expose Material。",
+        "Wafer=Wafer1；Wafer Side=Top；Material=Resist；Thickness=0，表示曝光整层厚度。不要输入与胶厚相同的0.5，以免残留微薄胶。",
+        "Mask Name=AH53_KEEP；Mask Polarity=Light。官方定义 Light 曝光形状之外，Dark 曝光形状之内。",
+        "本例希望胶保留在条纹上，图形外开口；Exposed Material 留空以移除被曝光胶，是旧工程已运行验证的设定。",
+        "理想参考关闭 Lithography Emulation 和 Edge Noise；非理想版本才按参数表启用圆角阈值和边缘噪声。"
+      ],
+      "evidence": ["exposure: Material / Exposed Material / Thickness / Mask Name / Mask Polarity / Lithography Emulation / Edge Noise", "old_ideal_recipe_secondary: ExposeMaterial step"],
+      "mandatory_visual_check": "胶在三条 mark 顶部，三条之外露出 Si；若胶在沟槽区域，极性就反了。"
+    },
+    {
+      "step": 9,
+      "title": "刻蚀：理想参考与非理想方案分开选择",
+      "ideal_reference": {
+        "actions": [
+          "Process Library > Etch > Straight Etch；Etch Materials 只选 Si_Xtal，Depth=0.3，Wafer Side=Top。",
+          "不额外指定理想版图 Mask Name，让实际剩余胶作为遮挡；去除光刻胶前不要把 Resist 也列入该理想刻蚀的可刻材料。",
+          "Straight Etch 是理想完全垂直刻蚀，可用于确认凸起极性和300 nm名义深度；不能把这个参考当作真实不完美刻蚀。"
+        ],
+        "evidence": ["straight_etch: description / Etch Materials / Depth / Mask Name"]
+      },
+      "nonideal_options": [
+        {
+          "effect": "侧壁倾斜",
+          "gui": "Etch > Taper Etch，设置 Sidewall Angle；0度为垂直。需要布局掩模或不可刻硬掩模来确定侧壁。",
+          "limitations": "负角度与遮挡材料组合有额外限制；直接 Taper Etch 不推荐配多材料选择比，因为角度会随刻蚀速度变化。",
+          "evidence": "taper_etch: Sidewall Angle / Advanced Options"
+        },
+        {
+          "effect": "横向侵蚀和圆角",
+          "gui": "Etch > Basic Etch，Depth 给定名义刻蚀量，Lateral Ratio=1 为各向同性；介于0和1时垂直强于横向。",
+          "limitations": "没有必要编造一个独立的 Isotropic Etch 菜单名称；其物理作用可通过 Basic Etch 参数实现。",
+          "evidence": "basic_etch: Depth / Lateral Ratio"
+        },
+        {
+          "effect": "胶损耗、溅射、可见性、微加载等组合效应",
+          "gui": "Etch > Multi Etch；Etch Parameters 为 Si 与 Resist 分别选择 Etch Type、Etch Ratio、Lateral Ratio 等；Depth 定义总名义时间尺度，Pattern Dependence 的 Edit 进入加载方程。",
+          "limitations": "需要 Advanced Modeling 功能；实际深度由几何、材料速率和方程共同决定。简单刻蚀不应使用 Multi Etch 来增加耗时。",
+          "evidence": "multi_etch: Etch Parameters / Etch Type / Etch Ratio / Depth / Pattern Dependence"
+        }
+      ],
+      "recipe_note": "若最终一键脚本使用 Multi Etch + Visibility + Basic Etch，手工教程应逐项对应同一参数表，不要用一个简单 Taper Etch 宣称完全复现该8步非理想结果。所有非理想参数是需实验校准的假设，不是软件自动推知的机台配方。"
+    },
+    {
+      "step": 10,
+      "title": "去胶：Remove Materials",
+      "actions": [
+        "Process Library > Utility > Remove Materials。",
+        "Wafer=Wafer1；Target Materials 只选 /Organics/Resist。不要选择包含 Si 的上级材料组。",
+        "将步骤放在全部硅刻蚀之后，避免提前去胶后把凸条顶面一起刻低。"
+      ],
+      "evidence": ["process_library: Utility", "remove: Wafer / Target Materials"]
+    },
+    {
+      "step": 11,
+      "title": "加入 Voxel Data Export 工艺步骤",
+      "actions": [
+        "Process Library > Save/Import/Export > Voxel Data Export，放在去胶之后。",
+        "Wafer=Wafer1；Output File 填带 .vdata 扩展名的文件名，例如 AH53_final.vdata。相对路径默认写到活动 .zam 所在目录。",
+        "Export Dopants：本教学没有掺杂，可关闭。",
+        "Export Plane Equations：若希望保留供后续重建使用的体素内材料界面法向和平面数据，建议开启；会增加文件大小。缺少这些数据时不能保证从占比唯一重建界面。",
+        "这是工艺步骤，不是将 .zam 重命名为 .vdata，也不是虚构的 File > Export VDATA 菜单。"
+      ],
+      "evidence": ["process_library: Save/Import/Export", "vdata: Wafer / Output File / Export Dopants / Export Plane Equations"],
+      "format_note": "VDATA 是 XML 元数据加压缩编码的体素数据；用记事本看见英文编码是正常现象。新教程如勾选Plane Equations，应在交付元数据里验证该段实际存在。"
+    },
+    {
+      "step": 12,
+      "title": "保存依赖、执行真实工艺构建",
+      "actions": [
+        "File > Save All 保存相关标签文件；Manager 如尚无文件名，File > Save As 保存 .zam。",
+        "在 Manager 的 Model Builder pane 底部点击 Build。若 .zam 尚未保存，会先出现 Save As。",
+        "观察 Model Builder pane 日志；步骤失败时先看错误原因，不要将生成的几何示意图当作构建成功。",
+        "改工艺后 Build 通常执行 Intelligent Restart；强制全部重跑用同一 pane 的 Rebuild All。修改 Resolution 或模型范围会触发完整重建。",
+        "Tools > Export Script 只导出 Python 脚本，不会自动执行；一键脚本必须确实启动并等待构建结束。"
+      ],
+      "evidence": ["common_menus: Save All / Save As", "manager_build: Building a Model / Rebuild from Change / Build Failures", "manager_menus: Tools > Export Script"]
+    },
+    {
+      "step": 13,
+      "title": "在 Viewer 逐步查看并检查截面",
+      "actions": [
+        "若已勾 Launch Viewer After Building，完成后自动显示三维结果；Scene pane 位于画布右侧。",
+        "依次点选曝光、刻蚀、去胶后的步骤，确认胶的位置、周边凹下和最终材料。没有 Save After Every Step 时通常只能看到最终结果。",
+        "View > Fit to Window 调整可视范围。",
+        "View > Enable Cross Sections，或画布右键 Open Cross Section > Open with Y Normal，得到穿过三条横向 X-Z 截面。",
+        "Cross-Section pane 中 Options > View > XZ 可轴对齐；移动截面到需要的 Y。可用 View > Draw Cross-Section Plane Only 单看截面。",
+        "检查条顶高于沟底，且去胶后不再有 Resist；倾角不能从被缩放的三维透视图直接量取。"
+      ],
+      "evidence": ["viewer_steps: Viewing Output / Stepping through Process or Analysis Nodes", "viewer_cross_section: View Cross-Sections / Axis-Aligned Views", "viewer_menus: Fit to Window / Enable Cross-Sections / Draw Cross-Section Plane Only"]
+    }
+  ],
+  "manual_layout_creation": {
+    "applicability": "适用于 Coventor 随附的 SEMulator3D Layout Editor；本机可执行文件 D:/SEMulator3D9/bin/NT40_x64/SEMulator3DLayoutEditor.exe 确实存在。不是第三方同名 LayoutEditorGUI 的菜单。Manager > Tools > Options 可配置不同的 Layout Editor Executable；若使用外部编辑器，不应套用以下菜单。",
+    "sources": {
+      "editor_intro": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/LE_Introduction.htm",
+      "create_library": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/FileCell_Mgmt/Creating_Files.htm",
+      "create_cell": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Cell_Management/LE_Creating_Cells.htm",
+      "save_cell": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Cell_Management/LE_Saving_Cells.htm",
+      "create_layer": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Object_Mgmt/Layer_Creation.htm",
+      "select_layer": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Object_Mgmt/Layer_Selection.htm",
+      "edit_layer": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Object_Mgmt/Editing_Layers.htm",
+      "rectangle": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Drawing/LE_Rectangle.htm",
+      "save_library": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/FileCell_Mgmt/SaveDelete_Files.htm",
+      "gds_export": "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/File_Translators/LE_GDS.htm",
+      "official_gui_tutorial": "D:/SEMulator3D9/docs/Documentation/Content/Getting_Started/Examples/Layout_Editor_tutorial.htm"
+    },
+    "workflow": [
+      {
+        "step": "L1",
+        "title": "启动并建立空布局库",
+        "actions": [
+          "在 Manager 工具栏点击 Launch Layout Editor 图标，打开随附编辑器。官方也支持从 Windows 开始菜单的 Coventor SEMulator3D 9 > SEMulator3D Layout Editor 启动。",
+          "在 Layout Editor 选择 File > New > Blank，新建空布局；File > Save As 先保存教程自己的 AH53_layout.cat。",
+          "选择 Tools > Units > Microns，明确把布局单位设为微米；不能依赖默认值，因为不同帮助页对默认 Microns/Nanometers 的说法不一致。",
+          "如需设置网格，可用 Tools > Options > Grid；Working Grid 可设0.01，Display Grid multiple可设50，以便输入坐标准确且画面不过密。"
+        ],
+        "evidence": ["editor_intro: Access / Setting Dimensional Units / Setting Grid Constraints", "create_library: Without a Template", "official_gui_tutorial: Create the Layout > Start / Save / Set the Units"]
+      },
+      {
+        "step": "L2",
+        "title": "建立并命名顶层 cell",
+        "actions": [
+          "可用 Cell > New 创建 cell；如希望在创建时直接输入名字，在画布底部 Command Line 输入 cellcreate -ui on，打开官方命名对话框，填写 AH53_DEMO。",
+          "如果 File > New > Blank 后已经在一个 unnamed cell 中，也可直接开始绘制，随后 Cell > Save，按出现的提示命名。",
+          "本例只有这一层 cell，且不引用其他 cell，所以它自然是本例顶层。导出 GDS 时在 Top cell 字段明确选择同一名字。",
+          "Cell > Status 可以在 Terminal Window 显示当前库、top cell、当前绘图层，供最后核对。"
+        ],
+        "evidence": ["create_cell: Creating Cells", "save_cell: Save / Save As", "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Cell_Management/LE_Cell_Structure.htm: Cell Status"],
+        "naming_caveat": "既有已运行 GDS 的 AH53_DEMO 顶层名已确认可由 SEMulator3D 导入；但某旧帮助页笼统说 cell 名只允许连字符而无其他标点，和常见下划线用法不一致。本轮未实操命名对话框。若此用户界面拒绝下划线，可用 AH53DEMO 并在导出及Manager Top Cell中统一改为AH53DEMO；不要保留不一致的名字。"
+      },
+      {
+        "step": "L3",
+        "title": "创建图形层和范围层，并设置 GDS 层号/数据类型",
+        "actions": [
+          "选择 View > Layers > Browse（或 Edit > Layers > Browse）打开 Layer Browser。",
+          "在 Layer Browser 自己的菜单选择 Layer > New；或在 Command Line 输入 layercreate -ui on。",
+          "创建 AH53_KEEP：Layer=AH53_KEEP，Mask name=AH53_KEEP，GDS字段填 L1D0，GDS I/O保持True。颜色和Fill可按易辨认设置。",
+          "再次创建 DOMAIN：Layer=DOMAIN，Mask name=DOMAIN，GDS填 L99D0，GDS I/O=True。范围层可用不同颜色、Fill=none。",
+          "若默认layer1仍存在且为空，可以不导出其内容；不要误把矩形画在默认空层上。",
+          "已有层属性可通过 Edit > Layers > Edit 或 View > Layers > Edit 修改。"
+        ],
+        "evidence": ["select_layer: Opening the Layer Browser", "create_layer: Layer / Mask name / GDS / GDS I/O", "edit_layer: Editing Layer Properties"],
+        "polarity_note": "官方 Layer Creation 要求 Mask contribution=Add、Mask field polarity=Light；这些是编辑器层字段，不替代工艺 Expose Material 的 Mask Polarity。GDS导出本身不携带曝光Light/Dark作用，本例最终保凸条的极性仍在工艺步骤设定。"
+      },
+      {
+        "step": "L4",
+        "title": "在 AH53_KEEP 上逐个画三条矩形",
+        "actions": [
+          "从嵌入式当前层下拉框选 AH53_KEEP，或在 Object > Rectangle 对话框的 Layer 字段直接选 AH53_KEEP。",
+          "选择 Object > Rectangle，Input Mode=Corners。按照下面坐标逐个创建矩形，每次点击 Apply；创建完毕 Close。",
+          "也可点击左侧垂直工具栏 Rectangle 图标，按底部 Enter first point / Enter second point 提示输入坐标对，按Enter确认；该工具会继续等待下一矩形，最后按Esc退出。",
+          "不要用鼠标随意拖拽来近似1.6微米宽度。"
+        ],
+        "rectangle_corners_um": [
+          {"name": "bar1", "first": [20.0,-10.0], "second": [21.6,10.0]},
+          {"name": "bar2", "first": [23.2,-10.0], "second": [24.8,10.0]},
+          {"name": "bar3", "first": [26.4,-10.0], "second": [28.0,10.0]}
+        ],
+        "evidence": ["rectangle: Rectangle Icon / Input Mode / Rectangle", "official_gui_tutorial: Create the Layout > Draw Three Rectangles"],
+        "optional_exact_terminal_commands": [
+          "rectangle 20 -10 21.6 10",
+          "rectangle 23.2 -10 24.8 10",
+          "rectangle 26.4 -10 28 10"
+        ],
+        "terminal_precondition": "仅在当前绘图层已正确选为AH53_KEEP、布局单位已设Microns时使用以上命令。负号建议用键盘上排，官方说明数字小键盘减号可能触发缩小视图。"
+      },
+      {
+        "step": "L5",
+        "title": "在 DOMAIN 上画模型范围矩形",
+        "actions": [
+          "把当前层或 Object > Rectangle 的Layer切换为 DOMAIN，Input Mode仍为Corners。",
+          "输入两角(16,-14)和(32,14)，点击Apply。",
+          "DOMAIN只是告诉工艺模拟范围，并不表示要保留成凸起的大块材料；后续曝光Mask Name必须选AH53_KEEP。"
+        ],
+        "rectangle_corners_um": {"first": [16.0,-14.0], "second": [32.0,14.0]},
+        "evidence": ["rectangle: Layer / Input Mode / Rectangle", "manager_setup: Model Extent > Single Mask"]
+      },
+      {
+        "step": "L6",
+        "title": "保存cell和库，核对范围",
+        "actions": [
+          "Cell > Save保存当前cell；如果尚未命名，按提示命名为AH53_DEMO或本次统一使用的等价合法名。",
+          "随后 File > Save 保存整个 .cat 文件。官方明确：只保存cell而没保存library不能保证磁盘上的更改已写入。",
+          "Cell > Summary可检查对象数量与坐标范围。AH53_KEEP应有3个矩形，DOMAIN有1个范围矩形；用层Browser显示/隐藏辅助检查。"
+        ],
+        "evidence": ["save_cell: opening warning / Save", "save_library: Saving Files", "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/Cell_Management/LE_Cell_Structure.htm: Cell Summary"]
+      },
+      {
+        "step": "L7",
+        "title": "导出GDS并固定顶层单元",
+        "actions": [
+          "最简单是 File > Save As，在Files of type选择 .gds，保存 AH53_layout.gds；这保留CAT原文件。",
+          "如需明确指定top cell，选择 File > Translators > Gds Out；Output file填新GDS路径，Library填刚保存的CAT，Top cell选AH53_DEMO，Cell留空，Scale factor=1。",
+          "点击Apply并Close；不要同时填写Top cell和Cell，否则官方说明会报错。",
+          "回Manager把Layout File选为GDS，Scan后再次选择相同Top Cell，设置layermap。也可直接选CAT并用本身的AH53_KEEP/DOMAIN掩模名，此时不需要额外Layout Map File。"
+        ],
+        "evidence": ["save_library: Save As", "gds_export: GDS Output", "gds_open: Translated File Export", "manager_setup: Layout File / Layout Map File / Top Cell"]
+      }
+    ],
+    "help_image_links_only": [
+      "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/lyout_ed_ref/catref_rectangle_ui.png",
+      "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/lyout_ed_ref/catref_LayerCreate.png",
+      "D:/SEMulator3D9/docs/Documentation/Content/Layout/Layout_Editor/lyout_ed_ref/catref_GDSout.png"
+    ],
+    "image_policy": "建议教程HTML链接本机相应帮助页（其中带原厂截图），而不把整份厂家手册或截图复制进公开GitHub仓库。"
+  },
+  "uncertainties_and_corrections": [
+    "官方通用菜单页写 Window > Tabs，部分章节简写 Window > Process Editor / Material Library；教程可写 Window 菜单中显示对应标签，不保证所有窗口布局的子菜单层次完全一致。",
+    "默认材料库帮助正文给出一个旧的且扩展名拼写不一致的示例名；实际安装文件已通过目录只读核对。",
+    "官方部分界面名称/连字符大小写不一致（Enable Cross Sections / Enable Cross-Sections），属于同一截面入口。",
+    "没有操作正在打开的 GUI，故不能把特定屏幕坐标、图标外观或当前用户定制布局写成已观察事实。",
+    "本轮没有读取 PDF，也没有读取、复制或修改 license 文件。",
+    "本机 HTML 帮助足以证明步骤和菜单；不建议在公开仓库捆绑厂家帮助或材料数据库。教程应链接本机安装文档或简短归纳。"
+  ]
+}

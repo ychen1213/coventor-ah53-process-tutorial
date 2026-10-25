@@ -1,0 +1,169 @@
+历史 AH53 工艺工程核查（2026-10-25，Asia/Hong_Kong）
+
+仅只读核查；没有启动 SEMulator3D、CAD、工艺仿真或重建任何原始工程。
+完整参数和证据哈希：historical_process_evidence.json。
+该 JSON 同时保留 inactive XML 分支，只有 active_by_xml_selector_and_enable_flags=true 的字段是当前流程活动参数；不能把所有模板残留值都当作设置。
+
+一、模型和版图
+
+这是“简化单方向 AH53 教学示例”，不是经过设备商/工厂认证的商业 AH53 设计。
+GDS 使用 gdspy：unit=1e-6 m，即坐标单位 µm；precision=1e-9 m，即数据库精度 1 nm。
+单元名 AH53_DEMO；保留条纹 AH53_KEEP=layer 1/datatype 0；范围 DOMAIN=layer 99/datatype 0。
+条纹是保留下来的凸 Si，不是挖下去的沟槽。
+4 组中心 x=-24,-8,8,24 µm；组周期 16 µm。
+每组3条，中心相对组中心 -3.2,0,+3.2 µm；条纹内子间距3.2 µm，条宽1.6 µm，因此名义条间隙1.6 µm。
+每条 y=-10..10 µm，长度20 µm。整个GDS有12条。
+
+理想工程 DOMAIN：x=-36..36 µm、y=-14..14 µm，72×28 µm，模拟完整4组12条。
+非理想工程 DOMAIN：x=16..32 µm、y=-14..14 µm，16×28 µm，只模拟1组3条。
+非理想 GDS 的 layer1 仍保留完整12条；只有 layer99 DOMAIN 缩小。不能把保留完整GDS误认为完成了完整12条的非理想仿真。
+full_domain_inputs/README.txt还明确记录：最初72×28 µm全域非理想尝试因运行时间/内存增长在MultiEtch中停止，未生成最终VDATA；该子目录只是归档输入，不能选作完成结果。
+非理想有效3条中心 x=20.8,24,27.2 µm，名义横向范围分别20..21.6、23.2..24.8、26.4..28 µm。
+两个工程都是模型单位µm，体素边长0.02 µm=20 nm。
+理想 Si 网格3600×1400×50；非理想800×1400×50。
+GDS 数据库1 nm精度，不等于3D形貌或工艺预测达到1 nm精度。
+
+二、理想流程：6个步骤，逐步填写值
+
+01 WaferSetup / “01 Si substrate 1um”
+   Wafer=Wafer1；材料 /Silicon/Si_Xtal；厚度1 µm。
+   waferBounds.type=mask，mask=DOMAIN。
+   surfacePlane=e100；notchVector=e110；notchDesignDirection=x。
+   已保存初始Si范围z=-0.5..+0.5 µm，初始上表面z=+0.5 µm。
+
+02 Deposit / “02 Coat resist 0.5um”
+   Wafer1、top侧；材料 /Organics/Resist；thickness=0.5 µm。
+   Deposit type=planarizing，referencePlane=highest。
+   作用：在Si上形成0.5 µm抗蚀剂。它是几何涂胶近似，不是旋涂流体仿真。
+
+03 ExposeMaterial / “03 Protect AH53 ridges”
+   Wafer1、top侧；处理材料 /Organics/Resist。
+   Thickness=0（特殊含义：处理所选材料的整个厚度）。
+   Mask=AH53_KEEP；Polarity=Light，即mask.polarity=true。
+   Light处理GDS多边形外的PR，条纹内PR保留，后续保护条纹下的Si。
+   lithographyEmulation关闭；edgeNoise关闭；exposeThroughSolids=false。
+
+04 Etch / “04 Etch surrounding Si 300nm”
+   Wafer1、top侧；材料 /Silicon/Si_Xtal；etchRatio=1（无量纲）。
+   Depth=0.3 µm=300 nm；Type=straight；高级mask选项关闭；selectivity=false。
+   只对Si实施直向刻蚀。PR保留在凸mark上，外围裸Si下降300 nm。
+
+05 RemoveMaterials / “05 Strip resist”
+   选择 /Organics/Resist 整体移除；updateVoids=true。
+   它是理想化材料去除操作，不代表实际去胶化学、残留物或对Si的损伤。
+
+06 VoxelDataExport / “06 Export final VDATA”
+   Wafer=Wafer1；输出 AH53_Si_300nm_Raised.vdata。
+   exportDopants=false；exportPlaneEquations=false。
+
+理想结果已经实际核对：初始Si体积2016.000000 µm³；最终1526.400000 µm³；去除489.600000 µm³。
+公式：(72×28-12×1.6×20)×0.3=489.6 µm³。
+12条中心处顶部z=0.5 µm、35个外围测试点z=0.2 µm，对应所测凸起高度300 nm；脱胶后PR体积0。
+“全部通过”是上述指定位置和体积的理想几何核对，不是全表面误差证明。
+
+三、非理想流程：8个步骤
+
+01、02与上述理想流程相同，但DOMAIN缩为16×28 µm。
+
+03 ExposeMaterial / “03 Rounded rough resist pattern”
+   Wafer1、top侧，PR材料，Thickness=0，Mask=AH53_KEEP，Light(true)，exposeThroughSolids=false。
+   Lithography Emulation开启；sizeThreshold=0.12 µm=120 nm。
+   Edge Noise开启；noiseType=gaussian；rmsAmplitude=0.06 µm=60 nm；corrLength=0.5 µm=500 nm。
+   Advanced Options开启；seed=53（无量纲整数）。
+   这60 nm是PR边缘随机扰动输入，不是最终Si的实测LER，也不是最终Si必须等于60 nm。
+   sizeThreshold=120 nm不等于规定最终所有角都有120 nm圆角半径。
+
+04 MultiEtch / “04 Taper etch with density loading”
+   Wafer1、top侧；Depth=0.22 µm=220 nm（名义值）。
+   Si材料 /Silicon/Si_Xtal：etchType=taper，etchRatio=1，lateralRatio=0.15，sidewallAngle=10°（0°是竖直）。
+   /Organics/材料组（当时实际存在的有机材料为PR）：etchType=sputter，etchRatio=0.25，lateralRatio=0.05。
+   PR sputterRatio=0.5；maxYieldAngle=50°。
+   PR的材料专属Pattern Dependence depth/lateralRatio/sputterRatio均disable，不套用Si的loading输入。
+   全局Pattern Dependence开启，globalMask=AH53_KEEP，polarity=true，lithographyResolution=0 µm。
+   localMask=useGlobal。
+   Advanced/Depth开启：constant=0.6、coefficient1=0.4、radius1=3.2 µm、directed1=false；
+   coefficient2=0、radius2=1 µm、directed2=false；averaging=false。
+   对应深度系数：0.6 + 0.4×Gaussian(open mask,radius=3.2 µm)。第二项长程Gaussian权重0，不贡献。
+   Source属性在文件里是sigma=0.12 rad、fixed tilt=0°、twist=0°，但本阶段材料没有使用visibility类型，不应把sigma解读为本阶段的有效可见性效应。
+   Advanced开启，acceleration=0：沿用20 nm原始体素；useImprovedNumerics=false（历史文件值）。
+
+05 MultiEtch / “05 Tilted directional trim”
+   Wafer1、top侧；Depth=0.04 µm=40 nm（名义值）。
+   Si：etchType=visibility，etchRatio=1，lateralRatio=0.1。
+   /Organics/组：etchType=basic，etchRatio=0.1，lateralRatio=0.05；其Pattern Dependence禁用。
+   全局Pattern Dependence关闭。
+   Source fixed tilt=20°、twist=0°、visibilitySourceSigma=0.12 rad。
+   Advanced开启，acceleration=0，useImprovedNumerics=false。
+   日志实际显示visibility isoRate=0，nRays=128；128是运行时日志值，不是生成器显式设置的独立教程输入。
+   作用：含遮挡和方向性的修整；最终左右不对称还叠加了之前PR形状和刻蚀，不能只归因于tilt。
+
+06 Etch / “06 Isotropic Si finish under resist”
+   Wafer1、top侧；材料 /Silicon/Si_Xtal；etchRatio=1；Depth=0.04 µm=40 nm。
+   Type=basic，Action=Enhanced Basic Etch；lateralRatio=1（横向/竖向相同比例的各向同性分量）。
+   Pattern Dependence=none；customOverhangRate=useLateralRatio；disableSkirting=false；selectivity=false。
+   本步骤PR仍存在，随后步骤7才去胶。其作用是横向侵蚀与弯曲过渡，不是直接指定某个圆角半径。
+
+07 RemoveMaterials / “07 Strip resist - final nonideal Si”
+   选择 /Organics/Resist 去除；updateVoids=true。
+
+08 VoxelDataExport / “08 Export nonideal VDATA”
+   Wafer=Wafer1；输出 AH53_Si_300nm_Nonideal.vdata。
+   exportDopants=false；exportPlaneEquations=false。
+
+所有ratio/constant/coefficient为无量纲；厚度、depth、radius和corrLength按模型单位µm；sidewall/maxYield/tilt/twist是°；sigma是rad。
+220+40+40=300 nm只是三个名义Depth的和。loading、PR侵蚀、局部遮挡、侧向分量使最终局部Si去除深度不同，不能要求输出处处300 nm。
+
+四、实际非理想结果与测量方式
+
+保存的ZAM IsComplete=true；metrics.build_complete=true；final Si=347.3128489375 µm³，最终PR=0。
+初始Si体积448 µm³，去除100.6871510625 µm³。不要与理想72×28域的总去除体积直接比较。
+3条中心处z=0.5 µm。y=0测试的两条间隙floor分别z=0.23796875、0.2378125 µm，对应262.03125、262.1875 nm深度；开阔区样点(x=18,y=0)floor z=0.21875 µm，对应281.25 nm深度。
+这些height/floor数来自FindZElevationAtPoint。它不是“真实连续界面逐点精确求交”的保证；此处是历史测量约定。
+
+CD/LER采用20 nm体素Si体积分数=0.5的线性插值轮廓。在z=0.35 µm、y=-9..9 µm，每条900个位置：
+中心x(µm)    平均CD(nm)     左LER1σ(nm)    右LER1σ(nm)
+20.8          1468.73775     58.22691       58.10194
+24.0          1540.01486     57.17774       71.77015
+27.2          1515.36073     69.86018       55.25152
+LER是边位置的总体标准差，未去趋势，未进行PSD/带宽/测量仪校正；不是跨批次设备能力指标。
+
+侧壁局部拟合在y≈-0.01 µm、z=0.31..0.45 µm进行x(z)线性拟合，角度atan(abs(dx/dz))：
+中心x(µm)    左拟合角(°)    右拟合角(°)
+20.8          13.66411       9.17135
+24.0          16.63568       9.31623
+27.2          17.29976       8.96659
+因此输入taperAngle=10°不能当作所有步骤完成后的统一侧壁角。
+
+PR在主刻蚀前体积48.426728125 µm³，之后42.6128558125 µm³，消耗5.8138723125 µm³，约12.0055%。
+step4→5同一中央条配对轮廓的平均内缩增量：左3.5177 nm、右20.6638 nm；没有zero-tilt对照，不能把这些差值当作tilt的纯因果效应。
+
+不能宣称：已标定真实设备、指定圆角半径、最终Si LER等于输入60 nm、最终侧壁角处处10°、完整12条非理想模型已完成、亚20 nm物理精度、已做网格收敛或重复种子统计。
+未提供实际气体、压强、RF功率、温度、时间标定蚀刻速率、实测SEM/TEM轮廓或设备校准数据；这里是原生几何/行为工艺仿真示例，不是从化学第一性原理预测工艺。
+
+五、历史构建日志与代码一键流程边界
+
+理想build.log：步骤1..6成功，Elapsed Time 144 seconds，包含VDATA导出。
+非理想build.log：20:20:22开始，步骤1..7成功，20:38:20进行步骤8时因工作目录不对找不到相对.vproc。
+非理想export_resume.log：从工程目录重启，跳过未改变步骤1..7，只重跑8；20:40:29 VoxelXMLExport finished，Elapsed Time30 seconds。
+因此当前结果已完成，但不能把首次build.log写成8步首次全部成功。
+rebuild.cmd现在先cd /d "%~dp0"，避免该相对路径问题。
+
+create_project.py：只生成GDS、layer map、vproc、vmpd、zam和parameters.json，不运行工艺仿真。
+create_nonideal.py：先调用理想生成器，再改DOMAIN、曝光与3段刻蚀；也只生成输入文件。
+rebuild.cmd：调用setEnvAndRun.bat ModelBuilder -m <zam>执行原生仿真，再执行verify_result.py或measure_nonideal.py，最后export_vdata.py --check-only。
+已有rebuild.cmd不调用create*.py，因此“从零一键生成+仿真”的新入口必须明确先生成、再ModelBuilder、再检查。
+历史create_project.py支持AH53_PROJECT_DIR；create_nonideal.py把ROOT固定到脚本目录，并绝对路径import历史ideal/create_project.py，不是可移植独立单文件。
+写新教程入口时应在独立新目录工作，避免重新生成覆盖历史.zam；本次核查没有执行这些脚本。
+
+六、可追溯的本机官方说明（不是猜测GUI菜单）
+
+Expose_Material.htm:344：Thickness=0处理整个厚度；:359..363：Dark处理图形内，Light处理图形外。
+D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Litho/Expose_Material.htm
+
+taper.htm:269：sidewallAngle=0°代表竖直；lateralRatio控制刻蚀偏置。
+D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Etch/Multi_Etch/taper.htm
+
+Multi_Etch.htm:387：Depth为etchRatio1平坦面名义最大竖向深度，局部结果依赖形貌和材料参数；:433：Angular Sigma单位rad；:478左右：acceleration0沿用默认体素。
+D:/SEMulator3D9/docs/Documentation/Content/Modeling/Processes/Steps/Etch/Multi_Etch/Multi_Etch.htm
+
+此处只给可核对的操作/属性名和输入值，没有编造Manager的菜单路径或鼠标点击步骤。
